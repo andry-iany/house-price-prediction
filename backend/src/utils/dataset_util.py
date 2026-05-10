@@ -8,17 +8,20 @@ load_dotenv()
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
-DATA_RAW_DIR = PROJECT_ROOT / 'data' / 'raw'
+
+PATH_DATASET_DIR = PROJECT_ROOT / 'data'
+PATH_RAW_DATASET_FILE = PATH_DATASET_DIR / 'Housing.csv'
+PATH_CLEANED_DATASET_FILE = PATH_DATASET_DIR / 'Cleaned__Housing.csv'
 
 
 def download_dataset():
     kagglehub.dataset_download(
         handle='yasserh/housing-prices-dataset', 
-        output_dir=DATA_RAW_DIR, 
+        output_dir=PATH_DATASET_DIR, 
         path='Housing.csv', 
         force_download=True
     )
-    print(f'Dataset downloaded to {DATA_RAW_DIR}')
+    print(f'Dataset downloaded to {PATH_DATASET_DIR}')
 
 
 
