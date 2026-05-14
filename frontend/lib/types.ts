@@ -10,6 +10,6 @@ export type HouseDetail = {
     hotwaterheating: boolean;
     airconditioning: boolean;
     parking: number;
-    furnishingstatus: number;
+    furnishingstatus: string;
     description: string;
 }

@@ -13,7 +13,7 @@ const houses = [
     hotwaterheating: true,
     airconditioning: true,
     parking: 2,
-    furnishingstatus: 2,
+    furnishingstatus: "furnished",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
   },
@@ -29,7 +29,7 @@ const houses = [
     hotwaterheating: true,
     airconditioning: true,
     parking: 2,
-    furnishingstatus: 2,
+    furnishingstatus: "furnished",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
   },
@@ -45,7 +45,7 @@ const houses = [
     hotwaterheating: true,
     airconditioning: true,
     parking: 2,
-    furnishingstatus: 2,
+    furnishingstatus: "furnished",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
   },
@@ -61,7 +61,7 @@ const houses = [
     hotwaterheating: true,
     airconditioning: true,
     parking: 2,
-    furnishingstatus: 2,
+    furnishingstatus: "furnished",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
   },
@@ -77,7 +77,7 @@ const houses = [
     hotwaterheating: true,
     airconditioning: true,
     parking: 2,
-    furnishingstatus: 2,
+    furnishingstatus: "furnished",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
   },
@@ -93,7 +93,7 @@ const houses = [
     hotwaterheating: true,
     airconditioning: true,
     parking: 2,
-    furnishingstatus: 2,
+    furnishingstatus: "furnished",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
   },
@@ -109,7 +109,7 @@ const houses = [
     hotwaterheating: true,
     airconditioning: true,
     parking: 2,
-    furnishingstatus: 2,
+    furnishingstatus: "furnished",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
   },
@@ -125,7 +125,7 @@ const houses = [
     hotwaterheating: true,
     airconditioning: true,
     parking: 2,
-    furnishingstatus: 2,
+    furnishingstatus: "furnished",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
   },
@@ -141,7 +141,7 @@ const houses = [
     hotwaterheating: true,
     airconditioning: true,
     parking: 2,
-    furnishingstatus: 2,
+    furnishingstatus: "furnished",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
   },
