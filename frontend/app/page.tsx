@@ -2,12 +2,12 @@ import { Button } from "@/components/ui/button"
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">This is the project</h1>
-        </div>
-      </div>
+    <div className="min-h-svh p-6">
+      <h1 className="text-3xl font-bold text-primary-foreground">
+        This is primary
+      </h1>
+      <h2 className="text-secondary-foreground">This is secondary</h2>
+      <p>This is the default text</p>
     </div>
   )
 }
