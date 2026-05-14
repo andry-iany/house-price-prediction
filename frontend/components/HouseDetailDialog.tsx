@@ -24,6 +24,7 @@ import {
   SquareParking,
 } from "lucide-react"
 import ActionButton from "./ActionButton"
+import { ScrollArea } from "./ui/scroll-area"
 
 type HouseDetailDialogProps = {
   houseDetail: HouseDetail
@@ -97,9 +98,11 @@ export function HouseDetailDialog(props: HouseDetailDialogProps) {
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="xl:max-w-2xl">
         <DialogHeader>
-          <DialogTitle className="mb-3 text-2xl font-bold text-primary-foreground">
+          <DialogTitle className="text-2xl font-bold text-primary-foreground">
             Detail
           </DialogTitle>
+        </DialogHeader>
+        <ScrollArea className="max-h-[70vh]">
           <div className="mb-5">
             <img
               src="https://avatar.vercel.sh/shadcn1"
@@ -122,7 +125,7 @@ export function HouseDetailDialog(props: HouseDetailDialogProps) {
               </div>
             ))}
           </div>
-        </DialogHeader>
+        </ScrollArea>
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="outline">Cancel</Button>
