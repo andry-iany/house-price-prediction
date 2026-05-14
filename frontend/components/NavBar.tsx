@@ -13,6 +13,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import Logo from "./Logo"
+import ActionButton from "./ActionButton"
 
 export function NavBar() {
   return (
@@ -51,7 +52,7 @@ export function NavBar() {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      <Button className="white bg-primary text-white">Sign In</Button>
+      <ActionButton variant="primary">Sign In</ActionButton>
     </header>
   )
 }
