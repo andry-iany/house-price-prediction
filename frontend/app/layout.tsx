@@ -30,7 +30,7 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <main className="m-auto max-w-7xl px-4">
+          <main className="m-auto max-w-7xl px-4 pb-7">
             <NavBar />
             <>{children}</>
           </main>
