@@ -13,3 +13,8 @@ export type HouseDetail = {
     furnishingstatus: string;
     description: string;
 }
+
+export type Filter = {
+  minPrice?: number
+  maxPrice?: number
+}
