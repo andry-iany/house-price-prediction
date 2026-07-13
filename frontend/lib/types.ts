@@ -1,4 +1,5 @@
 export type HouseDetail = {
+    id: number,
     price: number;
     bedrooms: number;
     area: number;

@@ -28,12 +28,12 @@ export default function Page() {
         <h2 className="mb-6 text-xl font-bold text-primary-foreground">
           Properties for Sale
         </h2>
-        <section className="flex flex-wrap items-center justify-between gap-x-3 gap-y-6">
+        <section className="flex flex-wrap items-center gap-8">
           {!filteredHouses.length && (
             <h3>No data to show. Adjust your filter</h3>
           )}
           {filteredHouses.map((house, i) => (
-            <ListingCard houseDetail={house} key={i} />
+            <ListingCard houseDetail={house} key={house.id} />
           ))}
         </section>
       </section>

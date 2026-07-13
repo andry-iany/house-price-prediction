@@ -1,6 +1,8 @@
+import { HouseDetail } from "@/lib/types"
 
 const houses = [
   {
+    id: 1,
     price: 1300000,
     bedrooms: 8,
     area: 9020,
@@ -17,6 +19,7 @@ const houses = [
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
   },
   {
+    id: 2,
     price: 1250000,
     bedrooms: 6,
     area: 7420,
@@ -33,6 +36,7 @@ const houses = [
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
   },
   {
+    id: 3,
     price: 250000,
     bedrooms: 4,
     area: 7420,
@@ -49,6 +53,7 @@ const houses = [
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
   },
   {
+    id: 4,
     price: 150000,
     bedrooms: 4,
     area: 7420,
@@ -65,6 +70,7 @@ const houses = [
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
   },
   {
+    id: 5,
     price: 3250000,
     bedrooms: 4,
     area: 7420,
@@ -81,6 +87,7 @@ const houses = [
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
   },
   {
+    id: 6,
     price: 120000,
     bedrooms: 4,
     area: 7420,
@@ -97,6 +104,7 @@ const houses = [
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
   },
   {
+    id: 7,
     price: 350000,
     bedrooms: 4,
     area: 7420,
@@ -113,6 +121,7 @@ const houses = [
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
   },
   {
+    id: 8,
     price: 5250000,
     bedrooms: 4,
     area: 7420,
@@ -129,6 +138,7 @@ const houses = [
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
   },
   {
+    id: 9,
     price: 1250000,
     bedrooms: 4,
     area: 7420,
@@ -146,7 +156,7 @@ const houses = [
   },
 ]
 
-const useGetHouseDetails = () => {
+const useGetHouseDetails = (): HouseDetail[] => {
   return houses
 }
 

@@ -8,7 +8,7 @@ import {
   FieldSet,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { SubmitEventHandler, useState } from "react"
+import { MouseEventHandler, SubmitEventHandler, useRef, useState } from "react"
 import ActionButton from "./ActionButton"
 import type { Filter } from "@/lib/types"
 
@@ -18,22 +18,10 @@ type SidebarFilterProps = {
 }
 
 const SidebarFilter = (props: SidebarFilterProps) => {
-  const { setFilter } = props
-
-  const onSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault()
-
-    const formData = new FormData(e.currentTarget)
-    const filters: Filter = {
-      minPrice: parseFloat((formData.get("minPrice") as string) || "0"),
-      maxPrice: parseFloat((formData.get("maxPrice") as string) || "0"),
-    }
-
-    setFilter(filters)
-  }
+  const { formRef, onResetFilter, onSubmit } = useSidebarFilter(props)
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} ref={formRef}>
       <FieldGroup>
         <FieldSet>
           <FieldLegend>
@@ -64,12 +52,57 @@ const SidebarFilter = (props: SidebarFilterProps) => {
             </Field>
           </FieldGroup>
         </FieldSet>
-        <Field>
-          <ActionButton variant="outline">Search</ActionButton>
+        <Field orientation="horizontal">
+          <div className="w-100">
+            <ActionButton name="searchBtn" variant="outline">
+              Search
+            </ActionButton>
+          </div>
+          <div className="w-100">
+            <ActionButton
+              name="resetFilter"
+              type="button"
+              variant="outline"
+              onClick={onResetFilter}
+            >
+              Reset Filter
+            </ActionButton>
+          </div>
         </Field>
       </FieldGroup>
     </form>
   )
+}
+
+const useSidebarFilter = (props: SidebarFilterProps) => {
+  const formRef = useRef<HTMLFormElement>(null)
+
+  const { setFilter } = props
+
+  // handle submit
+  const onSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault()
+
+    const formData = new FormData(e.currentTarget)
+    const filters: Filter = {
+      minPrice: parseFloat((formData.get("minPrice") as string) || "0"),
+      maxPrice: parseFloat((formData.get("maxPrice") as string) || "0"),
+    }
+
+    setFilter(filters)
+  }
+
+  // handle reset filter
+  const onResetFilter: MouseEventHandler<HTMLButtonElement> = (e) => {
+    formRef.current?.reset()
+    setFilter({})
+  }
+
+  return {
+    formRef,
+    onSubmit,
+    onResetFilter,
+  }
 }
 
 export default SidebarFilter

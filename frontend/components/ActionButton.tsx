@@ -1,25 +1,29 @@
 import { Button } from "@/components/ui/button"
+import { MouseEventHandler } from "react"
 
 type Props = {
   variant: "primary" | "secondary" | "outline"
   children: React.ReactNode
-  onClick?: () => void
+  onClick?: MouseEventHandler<HTMLButtonElement>
+  type?: "button" | "submit"
+  name?: string
 }
 
 const ActionButton = (props: Props) => {
-  const { children, variant, onClick } = props
+  const { children, name, variant, type, onClick } = props
+  const baseProps = { name, type, onClick }
 
   switch (variant) {
     case "primary":
       return (
-        <Button onClick={onClick} className="white bg-primary text-white">
+        <Button {...baseProps} className="white bg-primary text-white">
           {children}
         </Button>
       )
     case "outline":
       return (
         <Button
-          onClick={onClick}
+          {...baseProps}
           variant="outline"
           className="w-full border-primary-foreground text-primary-foreground hover:bg-primary/5"
         >
@@ -27,7 +31,7 @@ const ActionButton = (props: Props) => {
         </Button>
       )
     case "secondary":
-      return <Button onClick={onClick}>{children}</Button>
+      return <Button {...baseProps}>{children}</Button>
   }
 }
 
