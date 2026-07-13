@@ -29,6 +29,9 @@ export default function Page() {
           Properties for Sale
         </h2>
         <section className="flex flex-wrap items-center justify-between gap-x-3 gap-y-6">
+          {!filteredHouses.length && (
+            <h3>No data to show. Adjust your filter</h3>
+          )}
           {filteredHouses.map((house, i) => (
             <ListingCard houseDetail={house} key={i} />
           ))}
