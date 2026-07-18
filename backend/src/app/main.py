@@ -1,5 +1,4 @@
-import json
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from app import HouseModel
