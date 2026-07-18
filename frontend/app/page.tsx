@@ -1,19 +1,42 @@
-import { Button } from "@/components/ui/button"
+"use client"
+
+import SidebarFilter from "@/components/SidebarFilter"
+import { ListingCard } from "@/components/ListingCard"
+import { useState } from "react"
+import { Filter } from "@/lib/types"
+import useGetHouseDetails from "@/hooks/useGetHouseDetails"
 
 export default function Page() {
+  const [filter, setFilter] = useState<Filter>({})
+
+  const houses = useGetHouseDetails()
+  const filteredHouses = houses.filter((house) => {
+    return (
+      house.price >= (filter.minPrice || -Infinity) &&
+      house.price <= (filter.maxPrice || Infinity)
+    )
+  })
+
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
-        </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
-      </div>
-    </div>
+    <section className="flex py-8">
+      <section className="max-w-3xs min-w-3xs px-3">
+        <section>
+          <SidebarFilter filter={filter} setFilter={setFilter} />
+        </section>
+      </section>
+      <section className="w-full px-3">
+        <h2 className="mb-6 text-xl font-bold text-primary-foreground">
+          Properties for Sale
+        </h2>
+        <section className="flex flex-wrap items-center gap-8">
+          {!filteredHouses.length && (
+            <h3>No data to show. Adjust your filter</h3>
+          )}
+          {filteredHouses.map((house, i) => (
+            <ListingCard houseDetail={house} key={house.id} />
+          ))}
+        </section>
+      </section>
+    </section>
   )
 }
