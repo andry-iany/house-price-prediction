@@ -15,7 +15,7 @@ PATH_RAW_DATASET_FILE = PATH_DATASET_DIR / 'Housing.csv'
 PATH_RAW_TRAINING_DATASET = PATH_DATASET_DIR / 'Training__Housing.csv'
 PATH_RAW_TESTING_DATASET = PATH_DATASET_DIR / 'Testing_Housing.csv'
 PATH_CLEANED_DATASET_FILE = PATH_DATASET_DIR / 'Cleaned__Housing.csv'
-
+PATH_MODEL = PROJECT_ROOT / 'model' / 'linear-regression-model.pkl'
 
 def download_dataset():
     kagglehub.dataset_download(
