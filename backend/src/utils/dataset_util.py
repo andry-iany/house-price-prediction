@@ -2,6 +2,7 @@ import kagglehub
 
 from pathlib import Path
 from dotenv import load_dotenv
+import pandas as pd 
 
 
 load_dotenv()
@@ -27,3 +28,14 @@ def download_dataset():
 
 
 
+def preprocess(dataset):
+    # Convert categorical 'yes' and 'no' columns to binary (1/0)
+    categorical_cols = dataset.select_dtypes(include=['str']).columns
+
+    for col in categorical_cols:
+        if col != 'furnishingstatus':  # Handle this one separately
+            dataset[col] = dataset[col].map({'yes': 1, 'no': 0})
+
+    # 'furnishingstatus' has 3 unique values: furnished, semi-furnished, unfurnished
+    # Apply One-Hot Encoding
+    return pd.get_dummies(dataset, columns=['furnishingstatus'], drop_first=True, dtype=int)
