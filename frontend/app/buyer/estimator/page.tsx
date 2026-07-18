@@ -18,8 +18,48 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { HouseDetail } from "@/lib/types"
+import { MouseEventHandler, SubmitEventHandler, useRef, useState } from "react"
+
+type HouseDetailForm = Exclude<HouseDetail, "id" | "price" | "description">
+
+type EstimatorPageProps = {
+  setHouseDetail: (houseDetail?: HouseDetailForm) => void
+}
+
+const useEstimatorPage = (props: EstimatorPageProps) => {
+  const formRef = useRef<HTMLFormElement>(null)
+
+  const { setHouseDetail } = props
+
+  // handle submit
+  const onSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault()
+
+    const formData = new FormData(e.currentTarget)
+
+    console.log({ formData: [...formData.entries()] })
+  }
+
+  const onClearForm: MouseEventHandler<HTMLButtonElement> = (e) => {
+    formRef.current?.reset()
+    setHouseDetail()
+  }
+
+  return {
+    formRef,
+    onSubmit,
+    onClearForm,
+  }
+}
 
 export default function Page() {
+  const [houseDetail, setHouseDetail] = useState<HouseDetailForm>()
+
+  const { formRef, onClearForm, onSubmit } = useEstimatorPage({
+    setHouseDetail,
+  })
+
   const inputs = inputConfigs.map((item) => {
     if (item.type === "select") {
       return (
@@ -43,7 +83,7 @@ export default function Page() {
   })
 
   return (
-    <form className="m-auto max-w-xl p-6">
+    <form ref={formRef} onSubmit={onSubmit} className="m-auto max-w-xl p-6">
       <FieldGroup>
         <FieldSet>
           <FieldLegend>
@@ -64,7 +104,7 @@ export default function Page() {
               name="resetForm"
               type="button"
               variant="outline"
-              // onClick={onResetFilter}
+              onClick={onClearForm}
             >
               Reset Form
             </ActionButton>
@@ -113,7 +153,7 @@ const SelectInput = (props: SelectInputProps) => {
   return (
     <div key={name}>
       <Field className="pb-3 capitalize">{label}</Field>
-      <Select required>
+      <Select required name={name}>
         <SelectTrigger className="w-full capitalize">
           <SelectValue />
         </SelectTrigger>
