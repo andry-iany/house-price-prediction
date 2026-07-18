@@ -29,7 +29,6 @@ def download_dataset():
     print(f'Dataset downloaded to {PATH_DATASET_DIR}')
 
 
-
 def preprocess(dataset):
     # Convert categorical 'yes' and 'no' columns to binary (1/0)
     categorical_cols = dataset.select_dtypes(include=['str']).columns

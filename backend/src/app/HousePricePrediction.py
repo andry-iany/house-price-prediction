@@ -27,7 +27,8 @@ class PredictionEngine:
 
 
     def predict(self, input: list[HouseModel.House]):
-        X = pd.DataFrame(input)
+        dict_data = [obj.model_dump() for obj in input]
+        X = pd.DataFrame(dict_data)
         X = preprocess(X)
         X = self.__scaler__.transform(X)
         return self.__model__.predict(X)
