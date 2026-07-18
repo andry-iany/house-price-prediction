@@ -16,6 +16,8 @@ PATH_RAW_TRAINING_DATASET = PATH_DATASET_DIR / 'Training__Housing.csv'
 PATH_RAW_TESTING_DATASET = PATH_DATASET_DIR / 'Testing_Housing.csv'
 PATH_CLEANED_DATASET_FILE = PATH_DATASET_DIR / 'Cleaned__Housing.csv'
 PATH_MODEL = PROJECT_ROOT / 'model' / 'linear-regression-model.pkl'
+PATH_SCALER = PROJECT_ROOT / 'model' / 'linear-regression-scaler.pkl'
+PATH_SAMPLE_TEST = PATH_DATASET_DIR / 'temp.csv'
 
 def download_dataset():
     kagglehub.dataset_download(
@@ -38,4 +40,12 @@ def preprocess(dataset):
 
     # 'furnishingstatus' has 3 unique values: furnished, semi-furnished, unfurnished
     # Apply One-Hot Encoding
-    return pd.get_dummies(dataset, columns=['furnishingstatus'], drop_first=True, dtype=int)
+    # return pd.get_dummies(dataset, columns=['furnishingstatus'], drop_first=True, dtype=int)
+
+    status_series = dataset['furnishingstatus'].astype(str).str.strip().str.lower()
+    dataset['furnishingstatus_semi-furnished'] = status_series.map({'semi-furnished': 1}).fillna(0).astype(int)
+    dataset['furnishingstatus_unfurnished'] = status_series.map({'unfurnished': 1}).fillna(0).astype(int)
+
+    dataset.drop(columns=['furnishingstatus'], inplace=True)
+
+    return dataset
