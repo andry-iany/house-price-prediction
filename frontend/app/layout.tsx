@@ -4,6 +4,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import { NavBar } from "@/components/NavBar"
+import Providers from "./providers"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -31,8 +32,10 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <main className="m-auto max-w-7xl px-4 pb-7">
-            <NavBar />
-            <>{children}</>
+            <Providers>
+              <NavBar />
+              <>{children}</>
+            </Providers>
           </main>
         </ThemeProvider>
       </body>
