@@ -21,7 +21,9 @@ const useHousePrediction = () => {
         "Content-Type": "application/json",
         "User-Agent": "insomnia/12.2.0",
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify({
+        houseDetails: [body],
+      }),
     }
 
     const data = await fetch("http://localhost:8000/predict", options)
