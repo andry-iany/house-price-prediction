@@ -15,19 +15,22 @@ const useHousePrediction = () => {
 
     console.log({ body })
 
-    // const options = {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "User-Agent": "insomnia/12.2.0",
-    //   },
-    //   body: '{"houseDetails":[{"area":4800,"bedrooms":3,"bathrooms":2,"stories":4,"mainroad":"yes","guestroom":"yes","basement":"no","hotwaterheating":"no","airconditioning":"yes","parking":0,"prefarea":"no","furnishingstatus":"furnished"}]}',
-    // }
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "User-Agent": "insomnia/12.2.0",
+      },
+      body: JSON.stringify(body),
+    }
 
-    // return fetch("http://localhost:8000/predict", options)
-    //   .then((response) => response.json())
-    //   .then((response) => console.log(response))
-    //   .catch((err) => console.error(err))
+    const data = await fetch("http://localhost:8000/predict", options)
+      .then((response) => response.json())
+      .catch((err) => console.error(err))
+
+    console.log({ data })
+
+    return data
   }
 
   return useMutation({

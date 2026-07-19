@@ -7,38 +7,50 @@ import useHousePrediction from "@/hooks/useHousePrediction"
 import { MouseEventHandler, SubmitEventHandler, useRef, useState } from "react"
 
 export default function Page() {
-  const { formRef, onClearForm, onSubmit } = useEstimatorPage()
+  const { formRef, data, isPending, onClearForm, onSubmit } = useEstimatorPage()
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} className="m-auto max-w-xl p-6">
-      <FieldGroup>
-        <FieldSet>
-          <FieldLegend>
-            <h2 className="mb-0 text-xl font-bold text-primary-foreground">
-              House Price Estimator
-            </h2>
-          </FieldLegend>
-          <FieldGroup className="grid grid-cols-2">{renderInputs()}</FieldGroup>
-        </FieldSet>
-        <Field orientation="horizontal">
-          <div className="w-100">
-            <ActionButton name="submitBtn" variant="outline">
-              Submit
-            </ActionButton>
-          </div>
-          <div className="w-100">
-            <ActionButton
-              name="resetForm"
-              type="button"
-              variant="outline"
-              onClick={onClearForm}
-            >
-              Reset Form
-            </ActionButton>
-          </div>
-        </Field>
-      </FieldGroup>
-    </form>
+    <div className="mx-auto flex max-w-3xl">
+      <form ref={formRef} onSubmit={onSubmit} className="w-full p-6">
+        <FieldGroup>
+          <FieldSet>
+            <FieldLegend>
+              <h2 className="mb-0 text-xl font-bold text-primary-foreground">
+                House Price Estimator
+              </h2>
+            </FieldLegend>
+            <FieldGroup className="grid grid-cols-2">
+              {renderInputs()}
+            </FieldGroup>
+          </FieldSet>
+          <Field orientation="horizontal">
+            <div className="w-100">
+              <ActionButton name="submitBtn" variant="outline">
+                Submit
+              </ActionButton>
+            </div>
+            <div className="w-100">
+              <ActionButton
+                name="resetForm"
+                type="button"
+                variant="outline"
+                onClick={onClearForm}
+              >
+                Reset Form
+              </ActionButton>
+            </div>
+          </Field>
+        </FieldGroup>
+      </form>
+      <div className="min-w-3xs p-6">
+        <h1 className="mb-3 text-2xl">Estimated Price:</h1>
+        {data ? (
+          <div className="text-lg">$6482536</div>
+        ) : (
+          <small>Fill the form to the see the results here</small>
+        )}
+      </div>
+    </div>
   )
 }
 
@@ -65,6 +77,8 @@ const useEstimatorPage = () => {
 
   return {
     formRef,
+    data,
+    isPending,
     onSubmit,
     onClearForm,
   }
