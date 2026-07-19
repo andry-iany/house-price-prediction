@@ -7,11 +7,12 @@ type Props = {
   onClick?: MouseEventHandler<HTMLButtonElement>
   type?: "button" | "submit"
   name?: string
+  disabled?: boolean
 }
 
 const ActionButton = (props: Props) => {
-  const { children, name, variant, type, onClick } = props
-  const baseProps = { name, type, onClick }
+  const { children, name, variant, type, disabled, onClick } = props
+  const baseProps = { name, type, disabled, onClick }
 
   switch (variant) {
     case "primary":

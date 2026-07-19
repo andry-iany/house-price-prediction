@@ -6,6 +6,11 @@ import { Field, FieldGroup, FieldLegend, FieldSet } from "@/components/ui/field"
 import useHousePrediction from "@/hooks/useHousePrediction"
 import { MouseEventHandler, SubmitEventHandler, useRef, useState } from "react"
 
+const formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+})
+
 export default function Page() {
   const { formRef, data, isPending, onClearForm, onSubmit } = useEstimatorPage()
 
@@ -25,12 +30,17 @@ export default function Page() {
           </FieldSet>
           <Field orientation="horizontal">
             <div className="w-100">
-              <ActionButton name="submitBtn" variant="outline">
+              <ActionButton
+                disabled={isPending}
+                name="submitBtn"
+                variant="outline"
+              >
                 Submit
               </ActionButton>
             </div>
             <div className="w-100">
               <ActionButton
+                disabled={isPending}
                 name="resetForm"
                 type="button"
                 variant="outline"
@@ -45,7 +55,7 @@ export default function Page() {
       <div className="min-w-3xs p-6">
         <h1 className="mb-3 text-2xl">Estimated Price:</h1>
         {data ? (
-          <div className="text-lg">$6482536</div>
+          <div className="text-lg">{formatter.format(data)}</div>
         ) : (
           <small>Fill the form to the see the results here</small>
         )}
