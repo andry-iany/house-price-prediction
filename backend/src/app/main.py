@@ -36,7 +36,9 @@ def read_root():
 @app.post("/predict")
 def predict(data: Query):
     """Endpoint to make prediction"""
-    predictions = predictionEngine.predict(data.houseDetails)
+    predictions = []
+    if len(data.houseDetails) > 0:
+        predictions = predictionEngine.predict(data.houseDetails)
 
     return {
         "input_received": data.houseDetails,
