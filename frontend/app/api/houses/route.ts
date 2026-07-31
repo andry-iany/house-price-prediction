@@ -1,4 +1,3 @@
-import { db } from "@/lib/db"
 import { SellerService } from "@/lib/SellerService"
 import { NextResponse } from "next/server"
 
