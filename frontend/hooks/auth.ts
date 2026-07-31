@@ -43,12 +43,31 @@ const useLogin = () => {
       .then((response) => response.json())
       .catch((err) => console.error(err))
 
-    queryClient.refetchQueries({ queryKey: ["checkLoginStatus"] })
-
     queryClient.invalidateQueries({ queryKey: ["checkLoginStatus"] })
   }
 
   return useMutation({ mutationFn: login })
+}
+
+export const useLogout = () => {
+  const queryClient = useQueryClient()
+
+  const logout = async () => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+
+    await fetch("http://localhost:3000/api/logout", options)
+      .then((response) => response.json())
+      .catch((err) => console.error(err))
+
+    queryClient.invalidateQueries({ queryKey: ["checkLoginStatus"] })
+  }
+
+  return useMutation({ mutationFn: logout })
 }
 
 export default useLogin

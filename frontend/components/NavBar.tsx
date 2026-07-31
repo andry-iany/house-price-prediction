@@ -14,8 +14,12 @@ import {
 } from "@/components/ui/navigation-menu"
 import Logo from "./Logo"
 import ActionButton from "./ActionButton"
+import { useCheckLoginStatus, useLogout } from "@/hooks/auth"
 
 export function NavBar() {
+  const { loginStatus } = useCheckLoginStatus()
+  const { mutate: logOut, isPending } = useLogout()
+
   return (
     <header className="flex items-center justify-between border-b-2 px-3 py-6">
       <Logo />
@@ -52,7 +56,23 @@ export function NavBar() {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      <div>{/* <ActionButton variant="primary">Sign In</ActionButton> */}</div>
+      <div>
+        <ActionButton
+          variant="primary"
+          disabled={isPending}
+          onClick={() => {
+            loginStatus?.isAuthenticated && logOut()
+          }}
+        >
+          {loginStatus?.isAuthenticated ? (
+            <div>Log Out</div>
+          ) : (
+            <Link href="http://localhost:3000/seller/manage-listings">
+              Sign In
+            </Link>
+          )}
+        </ActionButton>
+      </div>
     </header>
   )
 }
