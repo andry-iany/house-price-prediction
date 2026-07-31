@@ -17,7 +17,6 @@ type CreateSeller = {
 export class SellerService {
   async createSeller(sellerDetail: CreateSeller): Promise<Seller> {
     let seller = this.getSellerByEmail(sellerDetail.email)
-    console.log({ seller })
     if (seller) {
       throw new Error("User already exists.")
     }
@@ -32,7 +31,6 @@ export class SellerService {
     if (!seller) {
       throw new Error("Unexpected error happened")
     }
-    console.log({ created_seller: this.getSellerByEmail(seller.email) })
 
     return {
       name: seller.name,

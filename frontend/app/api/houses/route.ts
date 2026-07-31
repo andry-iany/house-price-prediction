@@ -6,21 +6,39 @@ const sellerService = new SellerService()
 
 export async function GET() {
   const data = { message: "Hello world" }
-  console.log({ db })
 
-  //   dummyCreate()
+  dummyCreateSeller()
 
   return NextResponse.json(data, { status: 200 })
 }
 
-function dummyCreate() {
-  const sellerDetail = {
-    name: "jammy",
-    email: "jammy@gmail.com",
-    password: "12345",
-  }
+function dummyCreateSeller() {
+  const sellers = [
+    {
+      name: "jammy",
+      email: "jammy@gmail.com",
+      password: "12345",
+    },
+    {
+      name: "john doe",
+      email: "john@gmail.com",
+      password: "12345",
+    },
+    {
+      name: "jane doe",
+      email: "jane@gmail.com",
+      password: "12345",
+    },
+    {
+      name: "jack smith",
+      email: "jack@gmail.com",
+      password: "12345",
+    },
+  ]
 
-  const seller = sellerService.createSeller(sellerDetail)
+  for (const sellerDetail of sellers) {
+    sellerService.createSeller(sellerDetail)
+  }
 }
 
 // export async function POST(request: Request) {

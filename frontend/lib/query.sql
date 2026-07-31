@@ -30,3 +30,7 @@ CREATE TABLE IF NOT EXISTS house (
         FOREIGN KEY (seller_id) 
         REFERENCES seller(id)
 );
+
+DELETE from seller;
+
+SELECT * from seller;
