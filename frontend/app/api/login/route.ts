@@ -1,3 +1,4 @@
+import { getCurrentlyLoggedInUser } from "@/lib/authUtil"
 import { db } from "@/lib/db"
 import { SellerService } from "@/lib/SellerService"
 import { cookies } from "next/headers"
@@ -7,8 +8,8 @@ const sellerService = new SellerService()
 
 // check the authentication status
 export async function GET() {
-  const session = await cookies().then((obj) => obj.get("session"))
-  return NextResponse.json({ isAuthenticated: !!session?.value })
+  const email = await getCurrentlyLoggedInUser()
+  return NextResponse.json({ isAuthenticated: !!email, email })
 }
 
 // login flow
