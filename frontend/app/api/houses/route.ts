@@ -7,12 +7,14 @@ const sellerService = new SellerService()
 export async function GET() {
   const data = { message: "Hello world" }
 
-  dummyCreateSeller()
+  //   dummyCreateSeller()
+
+  await dummyLogin()
 
   return NextResponse.json(data, { status: 200 })
 }
 
-function dummyCreateSeller() {
+async function dummyCreateSeller() {
   const sellers = [
     {
       name: "jammy",
@@ -37,7 +39,24 @@ function dummyCreateSeller() {
   ]
 
   for (const sellerDetail of sellers) {
-    sellerService.createSeller(sellerDetail)
+    await sellerService.createSeller(sellerDetail)
+  }
+}
+
+async function dummyLogin() {
+  const sellers = [
+    { email: "jammy@gmail.com", password: "12345" },
+    { email: "jammy@gmail.com", password: "1234523" },
+    { email: "jammynotfound@gmail.com", password: "12345" },
+  ]
+
+  for (const seller of sellers) {
+    try {
+      const info = await sellerService.login(seller.email, seller.password)
+      console.log(info)
+    } catch (e) {
+      console.log("Error for seller", seller)
+    }
   }
 }
 

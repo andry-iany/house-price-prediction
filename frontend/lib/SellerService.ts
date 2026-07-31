@@ -39,6 +39,23 @@ export class SellerService {
     }
   }
 
+  async login(email: string, password: string) {
+    const seller = this.getSellerByEmail(email)
+    if (!seller) {
+      throw new Error("User not found")
+    }
+
+    const isPasswordValid = bcrypt.compareSync(
+      password,
+      seller.password_hash || ""
+    )
+
+    return {
+      authenticated: isPasswordValid,
+      token: isPasswordValid ? "12345" : undefined,
+    }
+  }
+
   getSellerByEmail(email: string) {
     const query = db.prepare("SELECT * FROM seller WHERE email = ?")
     return query.get(email) as Seller | undefined
