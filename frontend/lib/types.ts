@@ -1,20 +1,22 @@
 export type HouseDetail = {
-    id: number,
-    price: number;
-    description: string;
+  id: number
+  price: number
+  description: string
 
-    area: number;
-    bedrooms: number;
-    bathrooms: number;
-    stories: number;
-    mainroad: boolean;
-    guestroom: boolean;
-    basement: boolean;
-    hotwaterheating: boolean;
-    airconditioning: boolean;
-    parking: number;
-    prefarea: boolean;
-    furnishingstatus: string;
+  area: number
+  bedrooms: number
+  bathrooms: number
+  stories: number
+  mainroad: boolean
+  guestroom: boolean
+  basement: boolean
+  hotwaterheating: boolean
+  airconditioning: boolean
+  parking: number
+  prefarea: boolean
+  furnishingstatus: string
+
+  pictureId?: number
 }
 
 export type Filter = {

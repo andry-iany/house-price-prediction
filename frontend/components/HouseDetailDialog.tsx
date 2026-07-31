@@ -25,6 +25,7 @@ import {
 } from "lucide-react"
 import ActionButton from "./ActionButton"
 import { ScrollArea } from "./ui/scroll-area"
+import Image from "next/image"
 
 type HouseDetailDialogProps = {
   houseDetail: HouseDetail
@@ -104,11 +105,32 @@ export function HouseDetailDialog(props: HouseDetailDialogProps) {
         </DialogHeader>
         <ScrollArea className="max-h-[70vh]">
           <div className="mb-5">
-            <img
-              src="https://avatar.vercel.sh/shadcn1"
-              alt="Event cover"
-              className="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
-            />
+            {houseDetail.pictureId !== undefined ? (
+              <div className="bg-black/35">
+                <Image
+                  src={`/images/${houseDetail.pictureId}.jpg`}
+                  alt="Picture of the author"
+                  width={624}
+                  height={331}
+                  className="inline-block"
+                  style={{
+                    width: 624,
+                    height: 331,
+                    objectFit: "cover",
+                    objectPosition: "center",
+                  }}
+                />
+              </div>
+            ) : (
+              <>
+                <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
+                <img
+                  src="https://avatar.vercel.sh/shadcn1"
+                  alt="Event cover"
+                  className="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
+                />
+              </>
+            )}
           </div>
           <h3 className="text-xl font-bold text-primary-foreground">
             {currencyFormatter.format(houseDetail.price)}

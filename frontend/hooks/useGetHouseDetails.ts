@@ -9,6 +9,7 @@ const houses = [
     bathrooms: 6,
     stories: 2,
     mainroad: true,
+    prefarea: true,
     guestroom: false,
     basement: false,
     hotwaterheating: true,
@@ -17,6 +18,7 @@ const houses = [
     furnishingstatus: "furnished",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
+    pictureId: 1,
   },
   {
     id: 2,
@@ -26,6 +28,7 @@ const houses = [
     bathrooms: 2,
     stories: 2,
     mainroad: true,
+    prefarea: true,
     guestroom: false,
     basement: false,
     hotwaterheating: true,
@@ -34,6 +37,7 @@ const houses = [
     furnishingstatus: "furnished",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
+    pictureId: 2,
   },
   {
     id: 3,
@@ -43,6 +47,7 @@ const houses = [
     bathrooms: 2,
     stories: 2,
     mainroad: true,
+    prefarea: true,
     guestroom: false,
     basement: false,
     hotwaterheating: true,
@@ -51,6 +56,7 @@ const houses = [
     furnishingstatus: "furnished",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
+    pictureId: 3,
   },
   {
     id: 4,
@@ -60,6 +66,7 @@ const houses = [
     bathrooms: 2,
     stories: 2,
     mainroad: true,
+    prefarea: true,
     guestroom: false,
     basement: false,
     hotwaterheating: true,
@@ -68,6 +75,7 @@ const houses = [
     furnishingstatus: "furnished",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
+    pictureId: 4,
   },
   {
     id: 5,
@@ -77,6 +85,7 @@ const houses = [
     bathrooms: 2,
     stories: 2,
     mainroad: true,
+    prefarea: true,
     guestroom: false,
     basement: false,
     hotwaterheating: true,
@@ -85,6 +94,7 @@ const houses = [
     furnishingstatus: "furnished",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
+    pictureId: 5,
   },
   {
     id: 6,
@@ -94,6 +104,7 @@ const houses = [
     bathrooms: 2,
     stories: 2,
     mainroad: true,
+    prefarea: true,
     guestroom: false,
     basement: false,
     hotwaterheating: true,
@@ -102,6 +113,7 @@ const houses = [
     furnishingstatus: "furnished",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
+    pictureId: 6,
   },
   {
     id: 7,
@@ -111,6 +123,7 @@ const houses = [
     bathrooms: 2,
     stories: 2,
     mainroad: true,
+    prefarea: true,
     guestroom: false,
     basement: false,
     hotwaterheating: true,
@@ -119,6 +132,7 @@ const houses = [
     furnishingstatus: "furnished",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
+    pictureId: 7,
   },
   {
     id: 8,
@@ -128,6 +142,7 @@ const houses = [
     bathrooms: 2,
     stories: 2,
     mainroad: true,
+    prefarea: true,
     guestroom: false,
     basement: false,
     hotwaterheating: true,
@@ -136,6 +151,7 @@ const houses = [
     furnishingstatus: "furnished",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
+    pictureId: 8,
   },
   {
     id: 9,
@@ -145,6 +161,7 @@ const houses = [
     bathrooms: 2,
     stories: 2,
     mainroad: true,
+    prefarea: true,
     guestroom: false,
     basement: false,
     hotwaterheating: true,
@@ -153,6 +170,7 @@ const houses = [
     furnishingstatus: "furnished",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
+    pictureId: 9,
   },
 ]
 
