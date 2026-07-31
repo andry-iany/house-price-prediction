@@ -105,10 +105,10 @@ export function HouseDetailDialog(props: HouseDetailDialogProps) {
         </DialogHeader>
         <ScrollArea className="max-h-[70vh]">
           <div className="mb-5">
-            {houseDetail.pictureId !== undefined ? (
+            {houseDetail.picture_id !== undefined ? (
               <div className="bg-black/35">
                 <Image
-                  src={`/images/${houseDetail.pictureId}.jpg`}
+                  src={`/images/${houseDetail.picture_id}.jpg`}
                   alt="Picture of the author"
                   width={624}
                   height={331}
@@ -137,7 +137,8 @@ export function HouseDetailDialog(props: HouseDetailDialogProps) {
           </h3>
           <p className="mb-3">{houseDetail.description}</p>
           <p className="mb-6">
-            <span className="font-bold">Sold by:</span> {houseDetail.sellerName}
+            <span className="font-bold">Sold by:</span>{" "}
+            {houseDetail.seller_name}
           </p>
           <div className="grid grid-cols-3 gap-6 border-y py-5">
             {textIcons.map((item, i) => (

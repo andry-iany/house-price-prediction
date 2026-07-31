@@ -16,9 +16,9 @@ export type HouseDetail = {
   prefarea: boolean
   furnishingstatus: string
 
-  pictureId?: number
-  sellerId: number
-  sellerName: string
+  picture_id?: number
+  seller_id: number
+  seller_name: string
 }
 
 export type Filter = {
