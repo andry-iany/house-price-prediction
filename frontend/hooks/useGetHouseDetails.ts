@@ -1,6 +1,7 @@
 import { HouseDetail } from "@/lib/types"
+import { useState } from "react"
 
-const houses = [
+const data = [
   {
     id: 1,
     price: 1300000,
@@ -197,6 +198,15 @@ type UseGetHouseDetailsProps = {
 }
 
 const useGetHouseDetails = (props?: UseGetHouseDetailsProps): HouseDetail[] => {
+  const [houses, setHouses] = useState<HouseDetail[]>(data)
+
+  // const addHouse = (detail: HouseDetail) => {
+  //   setHouses((houses) => {
+  //     const nextId = Math.max(...houses.map(item => item.id)) + 1
+  //     return [...houses, { ...detail, id: nextId }]
+  //   })
+  // }
+
   return props?.sellerId !== undefined
     ? houses.filter((house) => house.sellerId === props.sellerId)
     : houses
