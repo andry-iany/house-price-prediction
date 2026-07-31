@@ -42,23 +42,25 @@ export function ListingCard(props: TListingCardProp) {
   return (
     <>
       <Card className="relative w-full max-w-2xs min-w-2xs pt-0">
-        {house.pictureId !== undefined ? (
-          <div className="bg-black/35">
-            <Image
-              src={`/images/${house.pictureId}.jpg`}
-              alt="Picture of the author"
-              width={288}
-              height={162}
-              className="inline-block"
-              style={{
-                width: 288,
-                height: 162,
-                objectFit: "cover",
-                objectPosition: "center",
-              }}
-            />
-          </div>
-        ) : (
+        {/* README: JUST RANDOMLY PICK ANY IMAGE FROM OUR PUBLIC ASSET FOR NOW */}
+        {/* {house.pictureId !== undefined ? ( */}
+        <div className="bg-black/35">
+          <Image
+            src={`/images/${Math.floor(Math.random() * 10)}.jpg`}
+            // src={`/images/${house.pictureId}.jpg`}
+            alt="Picture of the author"
+            width={288}
+            height={162}
+            className="inline-block"
+            style={{
+              width: 288,
+              height: 162,
+              objectFit: "cover",
+              objectPosition: "center",
+            }}
+          />
+        </div>
+        {/* ) : (
           <>
             <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
             <img
@@ -67,7 +69,7 @@ export function ListingCard(props: TListingCardProp) {
               className="relative z-20 aspect-video w-full object-cover brightness-60 grayscale dark:brightness-40"
             />
           </>
-        )}
+        )} */}
         <CardHeader className="border-b">
           <CardTitle className="text-lg font-bold text-primary-foreground">
             {currencyFormatter.format(house.price)}

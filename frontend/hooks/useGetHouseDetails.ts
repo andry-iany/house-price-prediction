@@ -1,4 +1,5 @@
 import { HouseDetail } from "@/lib/types"
+import { useQuery } from "@tanstack/react-query"
 import { useState } from "react"
 
 const data = [
@@ -197,19 +198,21 @@ type UseGetHouseDetailsProps = {
   sellerId?: number
 }
 
-const useGetHouseDetails = (props?: UseGetHouseDetailsProps): HouseDetail[] => {
-  const [houses, setHouses] = useState<HouseDetail[]>(data)
+const useGetHouseDetails = (props?: UseGetHouseDetailsProps) => {
+  const getHouseDetails = async () => {
+    const data = await fetch("http://localhost:3000/api/houses") // TODO: fix this for the seller
+      .then((response) => response.json())
+      .catch((err) => console.error(err))
 
-  // const addHouse = (detail: HouseDetail) => {
-  //   setHouses((houses) => {
-  //     const nextId = Math.max(...houses.map(item => item.id)) + 1
-  //     return [...houses, { ...detail, id: nextId }]
-  //   })
-  // }
+    return (data?.houses || []) as HouseDetail[]
+  }
 
-  return props?.sellerId !== undefined
-    ? houses.filter((house) => house.sellerId === props.sellerId)
-    : houses
+  const { data, ...rest } = useQuery({
+    queryKey: ["getAllHouseDetails"],
+    queryFn: getHouseDetails,
+  })
+
+  return { ...rest, houses: (data || []) as HouseDetail[] }
 }
 
 export default useGetHouseDetails

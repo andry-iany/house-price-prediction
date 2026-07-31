@@ -9,7 +9,7 @@ import useGetHouseDetails from "@/hooks/useGetHouseDetails"
 export default function Page() {
   const [filter, setFilter] = useState<Filter>({})
 
-  const houses = useGetHouseDetails()
+  const { houses } = useGetHouseDetails()
   const filteredHouses = houses.filter((house) => {
     return (
       house.price >= (filter.minPrice || -Infinity) &&
