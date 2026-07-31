@@ -1,17 +1,37 @@
 import bcrypt from "bcryptjs"
 import { db } from "./db"
 
-type Seller = {
+export type Seller = {
   id: number
   name: string
   email: string
   password_hash?: string
 }
 
-type CreateSeller = {
+export type CreateSeller = {
   email: string
   name: string
   password: string
+}
+
+export type CreateHouseDetail = {
+  price: number
+  description: string
+
+  area: number
+  bedrooms: number
+  bathrooms: number
+  stories: number
+  mainroad: boolean
+  guestroom: boolean
+  basement: boolean
+  hotwaterheating: boolean
+  airconditioning: boolean
+  parking: number
+  prefarea: boolean
+  furnishingstatus: string
+
+  picture_id?: number
 }
 
 export class SellerService {
@@ -55,7 +75,29 @@ export class SellerService {
     }
   }
 
-  async createHouseDetail() {}
+  async createHouseDetail(sellerEmail: string, houseDetail: CreateHouseDetail) {
+    const seller = this.getSellerByEmail(sellerEmail)
+
+    if (!seller) {
+      throw new Error("Seller not found")
+    }
+
+    const params = { ...houseDetail, seller_id: seller.id }
+
+    const createQuery = db.prepare(`
+          INSERT INTO house (
+            price, area, bedrooms, bathrooms, stories, parking, 
+            furnishingstatus, mainroad, guestroom, basement, 
+            hotwaterheating, airconditioning, prefarea, description, 
+            picture_id, seller_id
+          ) VALUES (
+            :price, :area, :bedrooms, :bathrooms, :stories, :parking, 
+            :furnishingstatus, :mainroad, :guestroom, :basement, 
+            :hotwaterheating, :airconditioning, :prefarea, :description, 
+            :picture_id, :seller_id);
+          `)
+    createQuery.run(params)
+  }
 
   async getHouses(email?: string) {
     const sql = `
