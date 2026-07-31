@@ -19,6 +19,7 @@ export type HouseDetail = {
   picture_id?: number
   seller_id: number
   seller_name: string
+  seller_email: string
 }
 
 export type Filter = {

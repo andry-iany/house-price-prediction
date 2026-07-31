@@ -59,8 +59,10 @@ export class SellerService {
 
   async getHouses(email?: string) {
     const sql = `
-        select *
+        select house.*, seller.name as seller_name, seller.email as seller_email
         from house 
+        inner join seller 
+        on seller.id = house.seller_id
         where 
           :email is null 
           or seller_id in (select id from seller where email = :email);

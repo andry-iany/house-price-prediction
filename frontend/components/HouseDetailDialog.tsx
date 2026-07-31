@@ -156,7 +156,9 @@ export function HouseDetailDialog(props: HouseDetailDialogProps) {
           <DialogClose asChild>
             <Button variant="outline">Cancel</Button>
           </DialogClose>
-          <ActionButton variant="primary">Contact Seller</ActionButton>
+          <ActionButton variant="primary">
+            <a href={`mailto:${houseDetail.seller_email}`}>Contact Seller</a>
+          </ActionButton>
         </DialogFooter>
       </DialogContent>
     </Dialog>

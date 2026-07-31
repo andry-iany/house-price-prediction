@@ -75,7 +75,8 @@ export function ListingCard(props: TListingCardProp) {
           <CardDescription className="line-clamp-3 text-xs">
             {house.description}
             <p className="mt-3">
-              <span className="font-bold">Sold by:</span> {house.seller_name}
+              <span className="font-bold">Sold by: </span>
+              <span className="capitalize">{house.seller_name}</span>
             </p>
           </CardDescription>
         </CardHeader>
