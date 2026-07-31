@@ -5,6 +5,13 @@ import { NextResponse } from "next/server"
 
 const sellerService = new SellerService()
 
+// check the authentication status
+export async function GET() {
+  const session = await cookies().then((obj) => obj.get("session"))
+  return NextResponse.json({ isAuthenticated: !!session?.value })
+}
+
+// login flow
 export async function POST(request: Request) {
   const { email, password } = await request.json()
 
