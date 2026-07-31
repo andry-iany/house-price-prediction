@@ -102,8 +102,8 @@ const useEstimatorPage = (props?: EstimatorPageProps) => {
     useCreateHouseDetail()
 
   useEffect(() => {
-    if (data && formRef.current) {
-      const el = (formRef.current.elements as any)["price"]
+    const el = (formRef.current?.elements as any)["price"]
+    if (data && el) {
       el.value = parseInt(`${data ?? ""}`)
     }
   }, [data])
