@@ -9,8 +9,6 @@ export async function GET() {
 
   //   dummyCreateSeller()
 
-  await dummyLogin()
-
   return NextResponse.json(data, { status: 200 })
 }
 
@@ -42,30 +40,3 @@ async function dummyCreateSeller() {
     await sellerService.createSeller(sellerDetail)
   }
 }
-
-async function dummyLogin() {
-  const sellers = [
-    { email: "jammy@gmail.com", password: "12345" },
-    { email: "jammy@gmail.com", password: "1234523" },
-    { email: "jammynotfound@gmail.com", password: "12345" },
-  ]
-
-  for (const seller of sellers) {
-    try {
-      const info = await sellerService.login(seller.email, seller.password)
-      console.log(info)
-    } catch (e) {
-      console.log("Error for seller", seller)
-    }
-  }
-}
-
-// export async function POST(request: Request) {
-//   try {
-//     const body = await request.json()
-
-//     return NextResponse.json({ success: true, received: body }, { status: 201 })
-//   } catch (error) {
-//     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 })
-//   }
-// }

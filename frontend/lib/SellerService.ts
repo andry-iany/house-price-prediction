@@ -52,7 +52,6 @@ export class SellerService {
 
     return {
       authenticated: isPasswordValid,
-      token: isPasswordValid ? "12345" : undefined,
     }
   }
 
