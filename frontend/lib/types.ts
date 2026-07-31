@@ -17,6 +17,8 @@ export type HouseDetail = {
   furnishingstatus: string
 
   pictureId?: number
+  sellerId: number
+  sellerName: string
 }
 
 export type Filter = {

@@ -74,6 +74,9 @@ export function ListingCard(props: TListingCardProp) {
           </CardTitle>
           <CardDescription className="line-clamp-3 text-xs">
             {house.description}
+            <p className="mt-3">
+              <span className="font-bold">Sold by:</span> {house.sellerName}
+            </p>
           </CardDescription>
         </CardHeader>
         <CardContent className="flex justify-between gap-3">

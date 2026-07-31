@@ -52,7 +52,7 @@ export function NavBar() {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      <ActionButton variant="primary">Sign In</ActionButton>
+      <div>{/* <ActionButton variant="primary">Sign In</ActionButton> */}</div>
     </header>
   )
 }

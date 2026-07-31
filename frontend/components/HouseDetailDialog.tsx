@@ -135,7 +135,10 @@ export function HouseDetailDialog(props: HouseDetailDialogProps) {
           <h3 className="text-xl font-bold text-primary-foreground">
             {currencyFormatter.format(houseDetail.price)}
           </h3>
-          <p className="mb-6">{houseDetail.description}</p>
+          <p className="mb-3">{houseDetail.description}</p>
+          <p className="mb-6">
+            <span className="font-bold">Sold by:</span> {houseDetail.sellerName}
+          </p>
           <div className="grid grid-cols-3 gap-6 border-y py-5">
             {textIcons.map((item, i) => (
               <div key={i} className="flex items-center gap-4 px-3">

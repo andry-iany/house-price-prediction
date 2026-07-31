@@ -19,6 +19,8 @@ const houses = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
     pictureId: 1,
+    sellerId: 1,
+    sellerName: "House dealer 1",
   },
   {
     id: 2,
@@ -38,6 +40,8 @@ const houses = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
     pictureId: 2,
+    sellerId: 2,
+    sellerName: "House dealer 2",
   },
   {
     id: 3,
@@ -57,6 +61,8 @@ const houses = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
     pictureId: 3,
+    sellerId: 3,
+    sellerName: "House dealer 3",
   },
   {
     id: 4,
@@ -76,6 +82,8 @@ const houses = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
     pictureId: 4,
+    sellerId: 4,
+    sellerName: "House dealer 4",
   },
   {
     id: 5,
@@ -95,6 +103,8 @@ const houses = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
     pictureId: 5,
+    sellerId: 5,
+    sellerName: "House dealer 5",
   },
   {
     id: 6,
@@ -114,6 +124,8 @@ const houses = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
     pictureId: 6,
+    sellerId: 5,
+    sellerName: "House dealer 5",
   },
   {
     id: 7,
@@ -133,6 +145,8 @@ const houses = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
     pictureId: 7,
+    sellerId: 7,
+    sellerName: "House dealer 7",
   },
   {
     id: 8,
@@ -152,6 +166,8 @@ const houses = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
     pictureId: 8,
+    sellerId: 5,
+    sellerName: "House dealer 5",
   },
   {
     id: 9,
@@ -171,11 +187,19 @@ const houses = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
     pictureId: 9,
+    sellerId: 5,
+    sellerName: "House dealer 5",
   },
 ]
 
-const useGetHouseDetails = (): HouseDetail[] => {
-  return houses
+type UseGetHouseDetailsProps = {
+  sellerId?: number
+}
+
+const useGetHouseDetails = (props?: UseGetHouseDetailsProps): HouseDetail[] => {
+  return props?.sellerId !== undefined
+    ? houses.filter((house) => house.sellerId === props.sellerId)
+    : houses
 }
 
 export default useGetHouseDetails
