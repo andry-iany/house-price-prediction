@@ -16,7 +16,7 @@ db.exec(`
     );
     
     CREATE TABLE IF NOT EXISTS house (
-        id INT PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
 
         price DECIMAL(12, 2) NOT NULL,
         area DECIMAL(10, 2) NOT NULL,

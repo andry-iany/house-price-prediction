@@ -5,23 +5,6 @@ import { NextResponse } from "next/server"
 
 const sellerService = new SellerService()
 
-async function dummyLogin() {
-  const sellers = [
-    { email: "jammy@gmail.com", password: "12345" },
-    { email: "jammy@gmail.com", password: "1234523" },
-    { email: "jammynotfound@gmail.com", password: "12345" },
-  ]
-
-  for (const seller of sellers) {
-    try {
-      const info = await sellerService.login(seller.email, seller.password)
-      console.log(info)
-    } catch (e) {
-      console.log("Error for seller", seller)
-    }
-  }
-}
-
 export async function POST(request: Request) {
   const { email, password } = await request.json()
 

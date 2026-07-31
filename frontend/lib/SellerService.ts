@@ -55,6 +55,23 @@ export class SellerService {
     }
   }
 
+  async createHouseDetail() {}
+
+  async getHouses(email?: string) {
+    const sql = `
+        select *
+        from house 
+        where 
+          :email is null 
+          or seller_id in (select id from seller where email = :email);
+      `
+    const res = db.prepare(sql).all({ email: email || null }) as
+      | Seller[]
+      | undefined
+
+    return res
+  }
+
   getSellerByEmail(email: string) {
     const query = db.prepare("SELECT * FROM seller WHERE email = ?")
     return query.get(email) as Seller | undefined
