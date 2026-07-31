@@ -23,11 +23,6 @@ type EstimatorPageProps = {
 
 export default function EstimatorPage(props?: EstimatorPageProps) {
   const { viewerMode = "buyer" } = props || {}
-
-  const renderEstimate = (data: number) => {
-    return <div className="text-lg">{formatter.format(data)}</div>
-  }
-
   const { formRef, data, isPending, onClearForm, onSubmit } = useEstimatorPage()
 
   return (
@@ -84,7 +79,7 @@ export default function EstimatorPage(props?: EstimatorPageProps) {
       <div className="min-w-3xs p-6">
         <h1 className="mb-3 text-2xl">Estimated Price:</h1>
         {data ? (
-          renderEstimate(data)
+          <div className="text-lg">{formatter.format(data)}</div>
         ) : (
           <small>Fill the form to the see the results here</small>
         )}
