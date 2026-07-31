@@ -29,16 +29,16 @@ export default function EstimatorPage() {
             </FieldGroup>
           </FieldSet>
           <Field orientation="horizontal">
-            <div className="w-100">
+            <div>
               <ActionButton
                 disabled={isPending}
                 name="submitBtn"
-                variant="outline"
+                variant="primary"
               >
-                Submit
+                Estimate Price
               </ActionButton>
             </div>
-            <div className="w-100">
+            <div>
               <ActionButton
                 disabled={isPending}
                 name="resetForm"

@@ -7,6 +7,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { ScrollArea } from "./ui/scroll-area"
+import EstimatorPage from "./EstimatorPage"
 
 type EditHouseDialogProps = {
   isOpen: boolean
@@ -18,12 +20,15 @@ const EditHouseDialog = (props: EditHouseDialogProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="xl:max-w-2xl">
+      <DialogContent className="xl:max-w-3xl">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-primary-foreground">
             Detail
           </DialogTitle>
         </DialogHeader>
+        <ScrollArea className="max-h-[70vh]">
+          <EstimatorPage />
+        </ScrollArea>
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="outline">Cancel</Button>
