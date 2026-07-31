@@ -12,7 +12,7 @@ import { useState } from "react"
 export default function SellerBoard() {
   const [isOpen, setIsOpen] = useState(false)
   const [filter, setFilter] = useState<Filter>({})
-  const { houses } = useGetHouseDetails({ sellerId: 5 }) // TODO: fix this
+  const { houses } = useGetHouseDetails({ viewerMode: "seller" })
   const filteredHouses = houses.filter((house) => {
     return (
       house.price >= (filter.minPrice || -Infinity) &&

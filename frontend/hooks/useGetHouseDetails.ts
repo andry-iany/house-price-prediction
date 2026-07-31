@@ -195,12 +195,16 @@ const data = [
 ]
 
 type UseGetHouseDetailsProps = {
-  sellerId?: number
+  viewerMode?: "seller" | "buyer"
 }
 
-const useGetHouseDetails = (props?: UseGetHouseDetailsProps) => {
+const useGetHouseDetails = (props: UseGetHouseDetailsProps = {}) => {
+  const { viewerMode = "buyer" } = props
+
   const getHouseDetails = async () => {
-    const data = await fetch("http://localhost:3000/api/houses") // TODO: fix this for the seller
+    const endpoit = viewerMode === "seller" ? "seller/house" : "houses"
+
+    const data = await fetch(`http://localhost:3000/api/${endpoit}`) // TODO: fix this for the seller
       .then((response) => response.json())
       .catch((err) => console.error(err))
 
@@ -208,7 +212,7 @@ const useGetHouseDetails = (props?: UseGetHouseDetailsProps) => {
   }
 
   const { data, ...rest } = useQuery({
-    queryKey: ["getAllHouseDetails"],
+    queryKey: ["getAllHouseDetails", viewerMode],
     queryFn: getHouseDetails,
   })
 
