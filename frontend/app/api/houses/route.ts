@@ -5,38 +5,6 @@ import { NextResponse } from "next/server"
 const sellerService = new SellerService()
 
 export async function GET() {
-  const data = { message: "Hello world" }
-
-  //   dummyCreateSeller()
-
-  return NextResponse.json(data, { status: 200 })
-}
-
-async function dummyCreateSeller() {
-  const sellers = [
-    {
-      name: "jammy",
-      email: "jammy@gmail.com",
-      password: "12345",
-    },
-    {
-      name: "john doe",
-      email: "john@gmail.com",
-      password: "12345",
-    },
-    {
-      name: "jane doe",
-      email: "jane@gmail.com",
-      password: "12345",
-    },
-    {
-      name: "jack smith",
-      email: "jack@gmail.com",
-      password: "12345",
-    },
-  ]
-
-  for (const sellerDetail of sellers) {
-    await sellerService.createSeller(sellerDetail)
-  }
+  const houses = await sellerService.getHouses()
+  return NextResponse.json({ houses: houses || [] }, { status: 200 })
 }
