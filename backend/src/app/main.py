@@ -28,11 +28,6 @@ class Query(BaseModel):
     houseDetails: list[HouseModel.House] = []
 
 
-@app.get("/")
-def read_root():
-    return {"message": "Welcome to the House Price prediction API"}
-
-
 @app.post("/predict")
 def predict(data: Query):
     """Endpoint to make prediction"""
