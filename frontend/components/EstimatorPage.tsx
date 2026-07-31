@@ -32,7 +32,9 @@ export default function EstimatorPage(props?: EstimatorPageProps) {
           <FieldSet>
             <FieldLegend>
               <h2 className="mb-0 text-xl font-bold text-primary-foreground">
-                House Price Estimator
+                {viewerMode === "seller"
+                  ? "Create house detail"
+                  : "House Price Estimator"}
               </h2>
             </FieldLegend>
             <FieldGroup className="grid grid-cols-2">
