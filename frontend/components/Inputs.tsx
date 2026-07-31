@@ -20,7 +20,7 @@ export type TInput = {
 }
 
 type TextInputProps = {
-  type: "text" | "number"
+  type: "text" | "number" | "email" | "password"
   label: string
   name: string
   defaultValue?: any

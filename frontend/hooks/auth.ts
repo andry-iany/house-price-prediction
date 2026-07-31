@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 type LoginStatus = {
   isAuthenticated: boolean
@@ -17,8 +17,38 @@ export const useCheckLoginStatus = () => {
   const { data, ...rest } = useQuery({
     queryKey: ["checkLoginStatus"],
     queryFn: checkLoginStatus,
-    enabled: false,
   })
 
   return { ...rest, loginStatus: data }
 }
+
+type TParam = {
+  email: string
+  password: string
+}
+
+const useLogin = () => {
+  const queryClient = useQueryClient()
+
+  const login = async (param: TParam) => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(param),
+    }
+
+    await fetch("http://localhost:3000/api/login", options)
+      .then((response) => response.json())
+      .catch((err) => console.error(err))
+
+    queryClient.refetchQueries({ queryKey: ["checkLoginStatus"] })
+
+    queryClient.invalidateQueries({ queryKey: ["checkLoginStatus"] })
+  }
+
+  return useMutation({ mutationFn: login })
+}
+
+export default useLogin

@@ -30,7 +30,7 @@ export default function RootLayout({
       )}
     >
       <body>
-        <ThemeProvider>
+        <ThemeProvider defaultTheme="light">
           <main className="m-auto max-w-7xl px-4 pb-7">
             <Providers>
               <NavBar />
