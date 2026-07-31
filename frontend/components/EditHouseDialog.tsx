@@ -27,7 +27,7 @@ const EditHouseDialog = (props: EditHouseDialogProps) => {
           </DialogTitle>
         </DialogHeader>
         <ScrollArea className="max-h-[70vh]">
-          <EstimatorPage />
+          <EstimatorPage viewerMode="seller" />
         </ScrollArea>
         <DialogFooter>
           <DialogClose asChild>

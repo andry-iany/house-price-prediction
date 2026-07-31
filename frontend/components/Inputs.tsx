@@ -16,16 +16,18 @@ export type TInput = {
   type: "text" | "number" | "select"
   label: string
   options?: string[]
+  defaultValue?: any
 }
 
 type TextInputProps = {
   type: "text" | "number"
   label: string
   name: string
+  defaultValue?: any
 }
 
 export const TextInput = (props: TextInputProps) => {
-  const { label, name, type } = props
+  const { label, name, type, defaultValue } = props
 
   return (
     <Field>
@@ -38,6 +40,7 @@ export const TextInput = (props: TextInputProps) => {
         type={type}
         name={name}
         required
+        defaultValue={defaultValue}
       />
     </Field>
   )

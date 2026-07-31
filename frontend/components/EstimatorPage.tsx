@@ -4,14 +4,30 @@ import ActionButton from "@/components/ActionButton"
 import { SelectInput, TextInput, TInput } from "@/components/Inputs"
 import { Field, FieldGroup, FieldLegend, FieldSet } from "@/components/ui/field"
 import useHousePrediction from "@/hooks/useHousePrediction"
-import { MouseEventHandler, SubmitEventHandler, useRef, useState } from "react"
+import {
+  MouseEventHandler,
+  SubmitEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from "react"
 
 const formatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
 })
 
-export default function EstimatorPage() {
+type EstimatorPageProps = {
+  viewerMode?: "buyer" | "seller"
+}
+
+export default function EstimatorPage(props?: EstimatorPageProps) {
+  const { viewerMode = "buyer" } = props || {}
+
+  const renderEstimate = (data: number) => {
+    return <div className="text-lg">{formatter.format(data)}</div>
+  }
+
   const { formRef, data, isPending, onClearForm, onSubmit } = useEstimatorPage()
 
   return (
@@ -25,7 +41,7 @@ export default function EstimatorPage() {
               </h2>
             </FieldLegend>
             <FieldGroup className="grid grid-cols-2">
-              {renderInputs()}
+              {renderInputs(viewerMode)}
             </FieldGroup>
           </FieldSet>
           <Field orientation="horizontal">
@@ -38,6 +54,19 @@ export default function EstimatorPage() {
                 Estimate Price
               </ActionButton>
             </div>
+            {viewerMode === "seller" && (
+              <div>
+                <ActionButton
+                  disabled={isPending}
+                  name="resetForm"
+                  type="button"
+                  variant="outline"
+                  //   onClick={onClearForm}
+                >
+                  Save house detail
+                </ActionButton>
+              </div>
+            )}
             <div>
               <ActionButton
                 disabled={isPending}
@@ -55,7 +84,7 @@ export default function EstimatorPage() {
       <div className="min-w-3xs p-6">
         <h1 className="mb-3 text-2xl">Estimated Price:</h1>
         {data ? (
-          <div className="text-lg">{formatter.format(data)}</div>
+          renderEstimate(data)
         ) : (
           <small>Fill the form to the see the results here</small>
         )}
@@ -68,6 +97,13 @@ const useEstimatorPage = () => {
   const formRef = useRef<HTMLFormElement>(null)
   const { data, isPending, mutateAsync } = useHousePrediction()
 
+  useEffect(() => {
+    if (data && formRef.current) {
+      const el = (formRef.current.elements as any)["price"]
+      el.value = data
+    }
+  }, [data])
+
   const onSubmit: SubmitEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
 
@@ -75,7 +111,9 @@ const useEstimatorPage = () => {
 
     let body: Record<string, string> = {}
     for (const key of formData.keys()) {
-      body[key] = formData.get(key)?.toString() || ""
+      if (key !== "price") {
+        body[key] = formData.get(key)?.toString() || ""
+      }
     }
 
     await mutateAsync(body)
@@ -94,7 +132,9 @@ const useEstimatorPage = () => {
   }
 }
 
-const renderInputs = () => {
+const renderInputs = (viewerMode: "seller" | "buyer") => {
+  const inputConfigs = getInputConfig(viewerMode)
+
   return inputConfigs.map((item) => {
     if (item.type === "select") {
       return (
@@ -112,58 +152,72 @@ const renderInputs = () => {
           name={item.name}
           type={item.type}
           key={item.name}
+          defaultValue={item.defaultValue}
         />
       )
     }
   })
 }
 
-const inputConfigs: TInput[] = [
-  { name: "bedrooms", type: "number", label: "bedrooms" },
-  { name: "area", type: "number", label: "area" },
-  { name: "bathrooms", type: "number", label: "bathrooms" },
-  { name: "parking", type: "number", label: "parking" },
-  { name: "stories", type: "number", label: "stories" },
-  {
-    name: "mainroad",
-    type: "select",
-    options: ["yes", "no"],
-    label: "main road",
-  },
-  {
-    name: "guestroom",
-    type: "select",
-    options: ["yes", "no"],
-    label: "guest room",
-  },
-  {
-    name: "basement",
-    type: "select",
-    options: ["yes", "no"],
-    label: "basement",
-  },
-  {
-    name: "hotwaterheating",
-    type: "select",
-    options: ["yes", "no"],
-    label: "Hot water heating",
-  },
-  {
-    name: "airconditioning",
-    type: "select",
-    options: ["yes", "no"],
-    label: "Air conditioning",
-  },
-  {
-    name: "prefarea",
-    type: "select",
-    options: ["yes", "no"],
-    label: "Prefered area",
-  },
-  {
-    name: "furnishingstatus",
-    type: "select",
-    options: ["furnished", "semi-furnished", "unfurnished"],
-    label: "furnishing status",
-  },
-]
+const getInputConfig = (viewerMode: "seller" | "buyer") => {
+  const inputConfigs: TInput[] = [
+    { name: "bedrooms", type: "number", label: "bedrooms" },
+    { name: "area", type: "number", label: "area" },
+    { name: "bathrooms", type: "number", label: "bathrooms" },
+    { name: "parking", type: "number", label: "parking" },
+    { name: "stories", type: "number", label: "stories" },
+    {
+      name: "mainroad",
+      type: "select",
+      options: ["yes", "no"],
+      label: "main road",
+    },
+    {
+      name: "guestroom",
+      type: "select",
+      options: ["yes", "no"],
+      label: "guest room",
+    },
+    {
+      name: "basement",
+      type: "select",
+      options: ["yes", "no"],
+      label: "basement",
+    },
+    {
+      name: "hotwaterheating",
+      type: "select",
+      options: ["yes", "no"],
+      label: "Hot water heating",
+    },
+    {
+      name: "airconditioning",
+      type: "select",
+      options: ["yes", "no"],
+      label: "Air conditioning",
+    },
+    {
+      name: "prefarea",
+      type: "select",
+      options: ["yes", "no"],
+      label: "Prefered area",
+    },
+    {
+      name: "furnishingstatus",
+      type: "select",
+      options: ["furnished", "semi-furnished", "unfurnished"],
+      label: "furnishing status",
+    },
+  ]
+
+  if (viewerMode === "seller") {
+    inputConfigs.push({
+      name: "price",
+      type: "number",
+      label: "price",
+      defaultValue: 0,
+    })
+  }
+
+  return inputConfigs
+}
