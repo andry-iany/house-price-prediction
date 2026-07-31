@@ -3,6 +3,7 @@
 import ActionButton from "@/components/ActionButton"
 import { SelectInput, TextInput, TInput } from "@/components/Inputs"
 import { Field, FieldGroup, FieldLegend, FieldSet } from "@/components/ui/field"
+import useCreateHouseDetail from "@/hooks/useCreateHouseDetail"
 import useHousePrediction from "@/hooks/useHousePrediction"
 import {
   MouseEventHandler,
@@ -19,11 +20,13 @@ const formatter = new Intl.NumberFormat("en-US", {
 
 type EstimatorPageProps = {
   viewerMode?: "buyer" | "seller"
+  onSavedHouseData?: () => void
 }
 
 export default function EstimatorPage(props?: EstimatorPageProps) {
-  const { viewerMode = "buyer" } = props || {}
-  const { formRef, data, isPending, onClearForm, onSubmit } = useEstimatorPage()
+  const { viewerMode = "buyer", onSavedHouseData } = props || {}
+  const { formRef, data, isPending, isCreatingHouse, onClearForm, onSubmit } =
+    useEstimatorPage(props)
 
   return (
     <div className="mx-auto flex max-w-3xl">
@@ -44,7 +47,7 @@ export default function EstimatorPage(props?: EstimatorPageProps) {
           <Field orientation="horizontal">
             <div>
               <ActionButton
-                disabled={isPending}
+                disabled={isPending || isCreatingHouse}
                 name="submitBtn"
                 variant="primary"
               >
@@ -54,11 +57,9 @@ export default function EstimatorPage(props?: EstimatorPageProps) {
             {viewerMode === "seller" && (
               <div>
                 <ActionButton
-                  disabled={isPending}
-                  name="resetForm"
-                  type="button"
+                  disabled={isPending || isCreatingHouse}
+                  name="createHouseBtn"
                   variant="outline"
-                  //   onClick={onClearForm}
                 >
                   Save house detail
                 </ActionButton>
@@ -66,7 +67,7 @@ export default function EstimatorPage(props?: EstimatorPageProps) {
             )}
             <div>
               <ActionButton
-                disabled={isPending}
+                disabled={isPending || isCreatingHouse}
                 name="resetForm"
                 type="button"
                 variant="outline"
@@ -90,30 +91,43 @@ export default function EstimatorPage(props?: EstimatorPageProps) {
   )
 }
 
-const useEstimatorPage = () => {
+const useEstimatorPage = (props?: EstimatorPageProps) => {
   const formRef = useRef<HTMLFormElement>(null)
-  const { data, isPending, mutateAsync } = useHousePrediction()
+  const {
+    data,
+    isPending,
+    mutateAsync: estimateHousePrice,
+  } = useHousePrediction()
+  const { mutateAsync: createHouse, isPending: isCreatingHouse } =
+    useCreateHouseDetail()
 
   useEffect(() => {
     if (data && formRef.current) {
       const el = (formRef.current.elements as any)["price"]
-      el.value = data
+      el.value = parseInt(`${data ?? ""}`)
     }
   }, [data])
 
   const onSubmit: SubmitEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
 
+    const submitterName = e.submitter?.getAttribute("name")
     const formData = new FormData(e.currentTarget)
 
     let body: Record<string, string> = {}
     for (const key of formData.keys()) {
-      if (key !== "price") {
-        body[key] = formData.get(key)?.toString() || ""
+      if (key === "price" && submitterName !== "createHouseBtn") {
+        continue
       }
+      body[key] = formData.get(key)?.toString() || ""
     }
 
-    await mutateAsync(body)
+    if (submitterName === "createHouseBtn") {
+      await createHouse(body)
+      props?.onSavedHouseData?.()
+    } else {
+      await estimateHousePrice(body)
+    }
   }
 
   const onClearForm: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -124,6 +138,7 @@ const useEstimatorPage = () => {
     formRef,
     data,
     isPending,
+    isCreatingHouse,
     onSubmit,
     onClearForm,
   }
@@ -213,6 +228,7 @@ const getInputConfig = (viewerMode: "seller" | "buyer") => {
       type: "number",
       label: "price",
       defaultValue: 0,
+      step: "any",
     })
   }
 

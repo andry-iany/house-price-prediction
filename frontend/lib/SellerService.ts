@@ -1,37 +1,12 @@
 import bcrypt from "bcryptjs"
 import { db } from "./db"
+import { CreateHouseDetail, CreateSeller } from "./types"
 
 export type Seller = {
   id: number
   name: string
   email: string
   password_hash?: string
-}
-
-export type CreateSeller = {
-  email: string
-  name: string
-  password: string
-}
-
-export type CreateHouseDetail = {
-  price: number
-  description: string
-
-  area: number
-  bedrooms: number
-  bathrooms: number
-  stories: number
-  mainroad: boolean
-  guestroom: boolean
-  basement: boolean
-  hotwaterheating: boolean
-  airconditioning: boolean
-  parking: number
-  prefarea: boolean
-  furnishingstatus: string
-
-  picture_id?: number
 }
 
 export class SellerService {
@@ -81,8 +56,13 @@ export class SellerService {
     if (!seller) {
       throw new Error("Seller not found")
     }
-
-    const params = { ...houseDetail, seller_id: seller.id }
+    const params = {
+      ...houseDetail,
+      picture_id: Math.floor(Math.random() * 10), // Add random pics from the public assets for now
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, omnis!",
+      seller_id: seller.id,
+    }
 
     const createQuery = db.prepare(`
           INSERT INTO house (

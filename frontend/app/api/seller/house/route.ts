@@ -1,5 +1,6 @@
 import { getCurrentlyLoggedInUser } from "@/lib/authUtil"
-import { CreateHouseDetail, SellerService } from "@/lib/SellerService"
+import { SellerService } from "@/lib/SellerService"
+import { CreateHouseDetail } from "@/lib/types"
 import { NextResponse } from "next/server"
 
 const sellerService = new SellerService()
