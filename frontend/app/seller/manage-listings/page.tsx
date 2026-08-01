@@ -5,8 +5,10 @@ import SellerBoard from "@/components/SellerBoard"
 
 export default function Page() {
   return (
-    <Authenticated>
-      <SellerBoard />
-    </Authenticated>
+    <Authenticated
+      renderChildren={(loginStatus) => (
+        <SellerBoard loginStatus={loginStatus} />
+      )}
+    ></Authenticated>
   )
 }

@@ -1,13 +1,13 @@
 "use client"
 
-import useLogin, { useCheckLoginStatus } from "@/hooks/auth"
+import useLogin, { LoginStatus, useCheckLoginStatus } from "@/hooks/auth"
 import { SubmitEventHandler, useEffect, useRef } from "react"
 import { Field, FieldGroup, FieldLegend, FieldSet } from "./ui/field"
 import ActionButton from "./ActionButton"
 import { TextInput } from "./Inputs"
 
 type AuthenticatedProps = {
-  children: React.ReactNode
+  renderChildren: (loginStatus: LoginStatus) => React.ReactNode
 }
 export default function Authenticated(props: AuthenticatedProps) {
   const { loginStatus, isLoading, refetch } = useCheckLoginStatus()
@@ -21,7 +21,7 @@ export default function Authenticated(props: AuthenticatedProps) {
   }
 
   if (loginStatus?.isAuthenticated) {
-    return <>{props.children}</>
+    return <>{props.renderChildren(loginStatus)}</>
   }
 
   return (

@@ -4,15 +4,20 @@ import ActionButton from "@/components/ActionButton"
 import EditHouseDialog from "@/components/EditHouseDialog"
 import { ListingCard } from "@/components/ListingCard"
 import SidebarFilter from "@/components/SidebarFilter"
+import { LoginStatus } from "@/hooks/auth"
 
 import useGetHouseDetails from "@/hooks/useGetHouseDetails"
 import { Filter } from "@/lib/types"
 import { useState } from "react"
 
-export default function SellerBoard() {
+type SellerBoardProps = {
+  loginStatus: LoginStatus
+}
+
+export default function SellerBoard({ loginStatus }: SellerBoardProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [filter, setFilter] = useState<Filter>({})
-  const { houses } = useGetHouseDetails({ viewerMode: "seller" })
+  const { houses } = useGetHouseDetails({ viewerMode: "seller", loginStatus })
   const filteredHouses = houses.filter((house) => {
     return (
       house.price >= (filter.minPrice || -Infinity) &&

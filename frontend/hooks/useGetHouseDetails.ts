@@ -1,12 +1,14 @@
 import { HouseDetail } from "@/lib/types"
 import { useQuery } from "@tanstack/react-query"
+import { LoginStatus } from "./auth"
 
 type UseGetHouseDetailsProps = {
   viewerMode?: "seller" | "buyer"
+  loginStatus?: LoginStatus
 }
 
 const useGetHouseDetails = (props: UseGetHouseDetailsProps = {}) => {
-  const { viewerMode = "buyer" } = props
+  const { viewerMode = "buyer", loginStatus } = props
 
   const getHouseDetails = async () => {
     const endpoint = viewerMode === "seller" ? "seller/house" : "houses"
@@ -19,7 +21,7 @@ const useGetHouseDetails = (props: UseGetHouseDetailsProps = {}) => {
   }
 
   const { data, ...rest } = useQuery({
-    queryKey: ["getAllHouseDetails", viewerMode],
+    queryKey: ["getAllHouseDetails", viewerMode, loginStatus?.email],
     queryFn: getHouseDetails,
   })
 

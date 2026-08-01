@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
-type LoginStatus = {
+export type LoginStatus = {
   isAuthenticated: boolean
   email?: string
 }
@@ -19,7 +19,7 @@ export const useCheckLoginStatus = () => {
     queryFn: checkLoginStatus,
   })
 
-  return { ...rest, loginStatus: data }
+  return { ...rest, loginStatus: data as LoginStatus | undefined }
 }
 
 type TParam = {
